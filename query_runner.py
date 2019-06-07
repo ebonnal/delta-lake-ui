@@ -61,8 +61,8 @@ def run(statement):
         statement = statement.replace(table.replace("/", "."), f"global_temp.{format_table_path(table)}")
     data = []
     version_max = 0
+    stack = ""
     try:
-        print(1)
         while True:
             for table in tables:
                 print(table, format_table_path(table))
@@ -71,10 +71,13 @@ def run(statement):
             print(version_max, statement)
             try:
                 data.append([version_max, spark.sql(statement).limit(1).collect()[0][0]])
-            except IndexError:
+            except Exception as e:
                 data.append([version_max, None])
+                stack = str(e)
+                break
             version_max += 1
     except pyspark.sql.utils.AnalysisException as e:
-        print(e)
+        if "time travel" not in str(e):
+            stack = str(e)
 
-    return data
+    return stack if len(stack) else data

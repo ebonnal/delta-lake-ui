@@ -11,7 +11,12 @@ button.addEventListener("click", function (ev) {
             document.getElementById("plot").innerHTML = this.responseText + document.getElementById("plot").innerHTML;
         }
     }
-    url = addQueriesDict(window.location.href, ["sql=" + document.getElementById("query").value])
+    var append = 0
+    if(document.getElementById("append").checked){
+        append = 1
+    }
+    url = addQueriesDict(window.location.href, ["sql=" + document.getElementById("query").value,
+                                                "append=" + append])
     xhttp.open("GET", url, true);
     xhttp.send();
 });

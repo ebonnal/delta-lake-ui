@@ -8,13 +8,29 @@ fig_pygal="""
 </figure>
 """
 
+
+
 def to_html_fig(chart):
     plot_html_fig = fig_pygal.format(a=chart.render(is_unicode=True))
     return plot_html_fig
 
-def plot(data, statement):
-    line_chart = pygal.Line(fill=True)
+
+previous = []
+
+def plot(data, statement, append=False):
+    if type(data) is str:
+        return f"ERROR OCCURRED: {data}"
+    global previous
+    line_chart = pygal.Line(fill=True, truncate_legend=7)
     line_chart.title = f'Result evolution among Delta Lake versions\n{statement}'
     line_chart.x_labels = [d[0] for d in data]
-    line_chart.add(None, [d[1] for d in data])
+    if append:
+        previous.append((statement, data))
+        for statement, data in previous:
+            line_chart.add(statement, [d[1] for d in data])
+    else:
+        line_chart.add(None, [d[1] for d in data])
+        previous = []
+        previous.append((statement, data))
+
     return to_html_fig(line_chart)
