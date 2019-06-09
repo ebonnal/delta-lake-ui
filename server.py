@@ -4,12 +4,12 @@ import subprocess
 import os
 import query_runner
 import plotter
+import dl_generator
 
+dl_generator.generate_data_if_needed()
 app = Flask(__name__)
 
 
-"""
-SELECT AVG(price) FROM delta.products  p JOIN delta.colors c ON c.name=p.name WHERE color='Red'"""
 
 @app.route('/', methods=['GET'])
 def login():

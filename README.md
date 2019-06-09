@@ -1,6 +1,6 @@
 
-# DeltaLakeUI
-UI to run SQL on [Delta Lake](https://github.com/delta-io/delta) tables and visualize the variations of the result among tables versions.
+# DeltaLakeUI (State: POC)
+Minimalist web UI to run SQL on [Delta Lake](https://github.com/delta-io/delta) tables and visualize the variations of the result among tables versions.
 
 ## Architecture
 - Minimal HTML/CSS/JS Front where user enter SQL queries

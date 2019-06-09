@@ -1,3 +1,4 @@
 .idea
 spark-warehouse
 __pycache__
+*.pdf
