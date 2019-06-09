@@ -2,3 +2,4 @@
 spark-warehouse
 __pycache__
 *.pdf
+delta
