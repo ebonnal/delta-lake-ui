@@ -21,7 +21,10 @@ def plot(data, statement, append=False):
     if type(data) is str:
         return f"ERROR OCCURRED: {data}"
     global previous
-    line_chart = pygal.Line(fill=True, truncate_legend=7)
+    
+    style = Style(background="#FFFFFF")
+    
+    line_chart = pygal.Line(fill=True, truncate_legend=7, style=style)
     line_chart.x_labels = [d[0] for d in data]
     try:
 
